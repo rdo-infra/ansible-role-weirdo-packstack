@@ -53,3 +53,5 @@ Example playbook
       force_handlers: True
       roles:
         - { role: "packstack", test: "scenario001" }
+
+test
