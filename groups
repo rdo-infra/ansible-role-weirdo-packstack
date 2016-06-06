@@ -1,3 +1,5 @@
-# UUID                                  	Group Name
-#
-8680d97bd56b07787c0816018c1ed823b1326f44	rdo-infra/ansible-role-weirdo-packstack-ptl
+# UUID          Group Name
+False 	Non-Interactive Users
+52a73c69e32bbd59697ba25988b4a041c6221032       	rdo-infra/ansible-role-weirdo-packstack-core
+8680d97bd56b07787c0816018c1ed823b1326f44        	rdo-infra/ansible-role-weirdo-packstack-ptl
+global:Registered-Users		Registered Users
