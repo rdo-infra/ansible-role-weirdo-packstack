@@ -14,21 +14,10 @@
 #   under the License.
 #
 
-- block:
-    - name: Clone upstream packstack repository
-      git:
-        repo: "{{ repository }}"
-        dest: "{{ clone_path }}"
-        version: "{{ version }}"
-    - include: 329505.yml
-  vars:
-    task: "tasks/setup.yml"
-  rescue:
-    - name: Failure occurred, executing rescue
-      include: roles/common/tasks/rescue.yml
-  always:
-    - name: Create directory where packstack logs will be stored
-      file:
-        path: "{{ packstack_workspace }}"
-        state: "directory"
-        recurse: "yes"
+# Tests https://review.openstack.org/#/c/329505/
+- command: git config --global user.email "you@example.com"
+- command: git config --global user.name "Your Name"
+- name: Checkout review
+  shell: git fetch https://git.openstack.org/openstack/packstack refs/changes/05/329505/1 && git checkout FETCH_HEAD
+  args:
+    chdir: "{{ clone_path }}"
