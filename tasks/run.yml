@@ -17,6 +17,11 @@
 # Workspace env variable is used by the tools/copy-logs.sh script sourced by
 # run_tests.sh for the log root.
 - block:
+    - name: "Set additional arguments if running against testing repository"
+      set_fact:
+        additional_arguments: "--enable-rdo-testing=y"
+      when: testing_repositories
+
     - name: "Run packstack integration test - {{ test }}"
       command: "./run_tests.sh"
       args:
@@ -25,6 +30,7 @@
         WORKSPACE: "{{ packstack_workspace }}"
         MANAGE_REPOS: "{{ manage_repos }}"
         INSTALL_FROM_SOURCE: "{{ install_from_source }}"
+        ADDITIONAL_ARGUMENTS: "{{ additional_arguments |default('') }}"
         SCENARIO: "{{ test }}"
   vars:
     task: "tasks/run.yml"
