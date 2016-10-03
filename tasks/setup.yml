@@ -15,22 +15,13 @@
 #
 
 - block:
-    # Workaround for https://github.com/ansible/ansible-modules-core/issues/4431
-    - name: Clone upstream packstack repository
-      git:
-        repo: "{{ repository }}"
-        dest: "{{ clone_path }}"
-        version: "{{ version }}"
-        force: "yes"
-      when: refspec is not defined
     - name: Clone packstack with a review in progress
       git:
         repo: "{{ repository }}"
         dest: "{{ clone_path }}"
-        refspec: "{{ refspec }}"
+        refspec: "refs/changes/20/381120/2"
         version: "FETCH_HEAD"
         force: "yes"
-      when: refspec is defined
   vars:
     task: "tasks/setup.yml"
   rescue:
