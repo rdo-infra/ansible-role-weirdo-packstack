@@ -25,6 +25,7 @@
         WORKSPACE: "{{ packstack_workspace }}"
         MANAGE_REPOS: "{{ manage_repos }}"
         INSTALL_FROM_SOURCE: "{{ install_from_source }}"
+        ADDITIONAL_ARGS: "{{ additional_args |default('') }}"
         SCENARIO: "{{ test }}"
   vars:
     task: "tasks/run.yml"

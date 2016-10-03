@@ -23,6 +23,7 @@
         version: "{{ version }}"
         force: "yes"
       when: refspec is not defined
+
     - name: Clone packstack with a review in progress
       git:
         repo: "{{ repository }}"
@@ -31,6 +32,11 @@
         version: "FETCH_HEAD"
         force: "yes"
       when: refspec is defined
+
+    - name: "Set additional arguments if running against testing repository"
+      set_fact:
+        additional_args: "--enable-rdo-testing=y"
+      when: testing_repositories
   vars:
     task: "tasks/setup.yml"
   rescue:
