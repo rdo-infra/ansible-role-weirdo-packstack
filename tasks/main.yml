@@ -14,5 +14,50 @@
 #   under the License.
 #
 
-- include: setup.yml
-- include: run.yml
+# Workspace env variable is used by the tools/copy-logs.sh script sourced by
+# run_tests.sh for the log root.
+- block:
+    - name: Create directory where packstack logs will be stored
+      file:
+        path: "{{ packstack_workspace }}"
+        state: "directory"
+        recurse: "yes"
+
+    # Workaround for https://github.com/ansible/ansible-modules-core/issues/4431
+    - name: Clone upstream packstack repository
+      git:
+        repo: "{{ repository }}"
+        dest: "{{ clone_path }}"
+        version: "{{ version }}"
+        force: "yes"
+      when: refspec is not defined
+
+    - name: Clone packstack with a review in progress
+      git:
+        repo: "{{ repository }}"
+        dest: "{{ clone_path }}"
+        refspec: "{{ refspec }}"
+        version: "FETCH_HEAD"
+        force: "yes"
+      when: refspec is defined
+
+    - name: "Set additional arguments if running against testing repository"
+      set_fact:
+        additional_args: "--enable-rdo-testing=y"
+      when: testing_repositories
+
+    - name: "Run packstack integration test - {{ test }}"
+      command: "./run_tests.sh"
+      args:
+        chdir: "{{ clone_path }}"
+      environment:
+        WORKSPACE: "{{ packstack_workspace }}"
+        MANAGE_REPOS: "{{ manage_repos }}"
+        INSTALL_FROM_SOURCE: "{{ install_from_source }}"
+        ADDITIONAL_ARGS: "{{ additional_args |default('') }}"
+        SCENARIO: "{{ test }}"
+  vars:
+    task: "tasks/main.yml"
+  rescue:
+    - name: Failure occurred, executing rescue
+      include: roles/common/tasks/rescue.yml
