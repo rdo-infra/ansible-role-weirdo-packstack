@@ -38,23 +38,13 @@
         state: "directory"
         recurse: "yes"
 
-    # Workaround for https://github.com/ansible/ansible-modules-core/issues/4431
-    - name: Clone upstream packstack repository
-      git:
-        repo: "{{ repository }}"
-        dest: "{{ clone_path }}"
-        version: "{{ version }}"
-        force: "yes"
-      when: refspec is not defined
-
     - name: Clone packstack with a review in progress
       git:
         repo: "{{ repository }}"
         dest: "{{ clone_path }}"
-        refspec: "{{ refspec }}"
+        refspec: "refs/changes/36/384236/1"
         version: "FETCH_HEAD"
         force: "yes"
-      when: refspec is defined
 
     - name: "Run packstack integration test - {{ test }}"
       command: "./run_tests.sh"
