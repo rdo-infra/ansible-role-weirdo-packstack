@@ -41,10 +41,20 @@
         force: "yes"
       when: refspec is defined
 
-    - name: "Set additional arguments if running against testing repository"
+    - name: Set additional argument if running against testing repository
       set_fact:
-        additional_args: "--enable-rdo-testing=y"
+        testing_arg: "--enable-rdo-testing=y"
       when: testing_repositories
+
+    - name: Set additional argument if running nested virtualization
+      set_fact:
+        virt_arg: "--nova-libvirt-virt-type=kvm"
+      when: nested_virtualization
+
+    - name: Configure additional arguments
+      set_fact:
+        additional_args: |
+          {{ testing_arg |default('') }} {{ virt_arg |default('') }}
 
     - name: "Run packstack integration test - {{ test }}"
       command: "./run_tests.sh"
