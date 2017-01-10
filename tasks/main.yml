@@ -14,6 +14,10 @@
 #   under the License.
 #
 
+- name: Set up qemu-kvm and nested virtualization if available
+  include: qemu-kvm.yml
+  static: no
+
 # Workspace env variable is used by the tools/copy-logs.sh script sourced by
 # run_tests.sh for the log root.
 - name: Set additional argument if running against testing repository
