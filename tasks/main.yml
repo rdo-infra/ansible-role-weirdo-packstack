@@ -55,6 +55,10 @@
     force: "yes"
   when: refspec is defined
 
+- name: Set up qemu-kvm and nested virtualization if available
+  include: qemu-kvm.yml
+  static: no
+
 - name: "Run packstack integration test - {{ test }}"
   command: "./run_tests.sh"
   args:
