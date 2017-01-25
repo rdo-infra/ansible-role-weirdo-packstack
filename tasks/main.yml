@@ -41,6 +41,10 @@
     state: "directory"
     recurse: "yes"
 
+####
+# Ocata has not yet been branched in packstack.
+# Remove these these temporary conditions when it's out.
+####
 # Workaround for https://github.com/ansible/ansible-modules-core/issues/4431
 - name: Clone upstream packstack repository
   git:
@@ -48,7 +52,19 @@
     dest: "{{ clone_path }}"
     version: "{{ version }}"
     force: "yes"
-  when: refspec is not defined
+  when:
+    - refspec is not defined
+    - version != "stable/ocata"
+
+- name: Clone upstream packstack repository (master override)
+  git:
+    repo: "{{ repository }}"
+    dest: "{{ clone_path }}"
+    version: "master"
+    force: "yes"
+  when:
+    - refspec is not defined
+    - version == "stable/ocata"
 
 - name: Clone packstack with a review in progress
   git:
