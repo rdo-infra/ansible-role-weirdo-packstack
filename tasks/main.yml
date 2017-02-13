@@ -20,10 +20,12 @@
 
 # Workspace env variable is used by the tools/copy-logs.sh script sourced by
 # run_tests.sh for the log root.
+# TODO: Remove "testing_repositories" when jobs have been updated
 - name: Set additional argument if running against testing repository
   set_fact:
     testing_arg: "--enable-rdo-testing=y"
-  when: testing_repositories
+  when: (testing_repository is defined and testing_repository) or
+        (testing_repositories is defined and testing_repositories)
 
 - name: Set additional argument if running nested virtualization
   set_fact:
