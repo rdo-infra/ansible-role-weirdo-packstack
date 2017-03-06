@@ -30,7 +30,7 @@
 - name: Set additional argument if running nested virtualization
   set_fact:
     virt_arg: "--nova-libvirt-virt-type=kvm"
-  when: nested_virtualization
+  when: nested_virtualization_enabled is defined
 
 - name: Configure additional arguments
   set_fact:
