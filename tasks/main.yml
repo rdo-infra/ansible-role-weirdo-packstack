@@ -27,11 +27,6 @@
   when: (testing_repository is defined and testing_repository) or
         (testing_repositories is defined and testing_repositories)
 
-- name: Set additional argument if running nested virtualization
-  set_fact:
-    virt_arg: "--nova-libvirt-virt-type=kvm"
-  when: nested_virtualization
-
 - name: Configure additional arguments
   set_fact:
     additional_args: >-

@@ -64,6 +64,10 @@
         msg: >
           /sys/module/kvm_intel/parameters/nested:
           {{ nested_virtualization.stdout }}
+
+    - name: Set additional argument if running nested virtualization
+      set_fact:
+        virt_arg: "--nova-libvirt-virt-type=kvm"
   when:
     - "{{ 'Intel' in ansible_processor |join('') }}"
     - "{{ 'vmx' in cpu_flags }}"
@@ -96,6 +100,10 @@
         msg: >
           /sys/module/kvm_amd/parameters/nested:
           {{ nested_virtualization.stdout }}
+
+    - name: Set additional argument if running nested virtualization
+      set_fact:
+        virt_arg: "--nova-libvirt-virt-type=kvm"
   when:
     - "{{ 'AMD' in ansible_processor |join('') }}"
     - "{{ 'svm' in cpu_flags }}"
