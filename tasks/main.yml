@@ -27,10 +27,15 @@
   when: (testing_repository is defined and testing_repository) or
         (testing_repositories is defined and testing_repositories)
 
+- name: Set extra tempest args for packstack
+  set_fact:
+    tempest_args: >-
+      --provision-tempest-repo-revision={{ tempest_version |default('master') }}
+
 - name: Configure additional arguments
   set_fact:
     additional_args: >-
-      {{ testing_arg |default('') }} {{ virt_arg |default('') }}
+      {{ testing_arg |default('') }} {{ virt_arg |default('') }} {{ tempest_args |default('') }}
 
 - name: Create directory where packstack logs will be stored
   file:
