@@ -38,14 +38,23 @@
     state: "directory"
     recurse: "yes"
 
-# Workaround for https://github.com/ansible/ansible-modules-core/issues/4431
-- name: Clone upstream packstack repository
-  git:
-    repo: "{{ repository }}"
-    dest: "{{ clone_path }}"
-    version: "{{ version }}"
-    force: "yes"
-  when: refspec is not defined
+- block:
+    # Workaround for https://github.com/ansible/ansible-modules-core/issues/4431
+    - name: Clone upstream packstack repository
+      git:
+        repo: "{{ repository }}"
+        dest: "{{ clone_path }}"
+        version: "{{ version }}"
+        force: "yes"
+      when: refspec is not defined
+  rescue:
+    - name: Clone upstream packstack repository from master branch (fallback)
+      git:
+        repo: "{{ repository }}"
+        dest: "{{ clone_path }}"
+        version: "{{ version }}"
+        force: "yes"
+      when: refspec is not defined
 
 - name: Clone packstack with a review in progress
   git:
