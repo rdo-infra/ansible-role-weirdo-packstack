@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "baa201ad_c1a2e599",
+        "filename": "tasks/main.yml",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 128
+      },
+      "writtenOn": "2017-05-16T08:44:23Z",
+      "side": 1,
+      "message": "I think this should be \"master\"",
+      "range": {
+        "startLine": 55,
+        "startChar": 18,
+        "endLine": 55,
+        "endChar": 31
+      },
+      "revId": "793c691f3a269671f7a7586dbf4330f388ba9e8d",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
