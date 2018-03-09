@@ -107,3 +107,21 @@
   when:
     - "{{ 'AMD' in ansible_processor |join('') }}"
     - "{{ 'svm' in cpu_flags }}"
+
+- block:
+    - name: Unload kvm_pr module
+      modprobe:
+        name: "kvm_pr"
+        state: "absent"
+
+    - name: Re-load kvm_pr module
+      modprobe:
+        name: "kvm_pr"
+        state: "present"
+      register: nested_virtualization
+
+    - name: Set additional argument if running nested virtualization
+      set_fact:
+        virt_arg: "--nova-libvirt-virt-type=kvm"
+  when:
+    - "{{ 'power' in ansible_processor |lower |join('') }}"
