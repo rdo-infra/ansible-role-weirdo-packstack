@@ -25,7 +25,8 @@
   set_fact:
     testing_arg: "--enable-rdo-testing=y"
   when: (testing_repository is defined and testing_repository) or
-        (testing_repositories is defined and testing_repositories)
+        (testing_repositories is defined and testing_repositories) or
+        (version == "stable/rocky")
 
 - name: Configure additional arguments
   set_fact:
