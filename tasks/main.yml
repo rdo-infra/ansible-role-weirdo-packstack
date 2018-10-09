@@ -75,3 +75,4 @@
     INSTALL_FROM_SOURCE: "{{ install_from_source }}"
     ADDITIONAL_ARGS: "{{ additional_args |default('') }}"
     SCENARIO: "{{ test }}"
+    SELINUX_ENFORCING: "{{ selinux_enforcing | default('true') }}"
