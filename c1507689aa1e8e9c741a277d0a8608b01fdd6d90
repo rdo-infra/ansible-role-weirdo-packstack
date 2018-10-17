@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "9abe1de1_d1833acb",
+        "filename": "tasks/main.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 113
+      },
+      "writtenOn": "2018-10-17T09:39:39Z",
+      "side": 1,
+      "message": "To make sure it is treated as a boolean value, I would use (nested_virtualization | true)",
+      "revId": "c1507689aa1e8e9c741a277d0a8608b01fdd6d90",
+      "serverId": "270e2033-b340-4cff-9539-693957ebf0e7",
+      "unresolved": false
+    }
+  ]
+}
