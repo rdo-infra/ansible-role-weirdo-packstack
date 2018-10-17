@@ -16,6 +16,8 @@
 
 - name: Set up qemu-kvm and nested virtualization if available
   include: qemu-kvm.yml
+  when:
+    - nested_virtualization
   static: no
 
 # Workspace env variable is used by the tools/copy-logs.sh script sourced by
