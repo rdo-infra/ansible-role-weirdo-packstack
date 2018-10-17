@@ -28,6 +28,7 @@ For default values, see `defaults/main.yml`_
 * ``delorean_deps_url``: URL to the delorean-deps repository .repo file.
 * ``packstack_workspace``: Path where Packstack should believe the jenkins workspace is at
 * ``selinux_enforcing``: When set to true, it will enable selinux enforcing in the system deploying packstack
+* ``nested_virtualization``: When set to true, it will enable nested virtualization in the system based on availability
 
 .. _defaults/main.yml: https://github.com/redhat-openstack/ansible-role-weirdo-packstack/blob/master/defaults/main.yml
 
