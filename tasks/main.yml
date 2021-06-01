@@ -67,6 +67,19 @@
     force: "yes"
   when: refspec is defined
 
+# Disable EC2 facts as it timeouts in some cases and are not needed
+- name: Create facter config directory
+  file:
+      state: directory
+      path: /etc/puppetlabs/facter
+- name: Create facter config file
+  copy:
+      dest: /etc/puppetlabs/facter/facter.conf
+      content: |
+        facts : {
+          blocklist: [ "EC2" ],
+        }
+
 - name: "Run packstack integration test - {{ test }}"
   command: "./run_tests.sh"
   args:
