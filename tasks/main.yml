@@ -15,10 +15,9 @@
 #
 
 - name: Set up qemu-kvm and nested virtualization if available
-  include: qemu-kvm.yml
+  include_tasks: qemu-kvm.yml
   when:
     - nested_virtualization|bool
-  static: no
 
 # Workspace env variable is used by the tools/copy-logs.sh script sourced by
 # run_tests.sh for the log root.
