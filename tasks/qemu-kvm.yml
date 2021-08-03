@@ -69,8 +69,8 @@
       set_fact:
         virt_arg: "--nova-libvirt-virt-type=kvm"
   when:
-    - "{{ 'Intel' in ansible_processor |join('') }}"
-    - "{{ 'vmx' in cpu_flags }}"
+    - "'Intel' in ansible_processor |join('')"
+    - "'vmx' in cpu_flags"
 
 - block:
     - name: Unload kvm_amd module
@@ -105,5 +105,5 @@
       set_fact:
         virt_arg: "--nova-libvirt-virt-type=kvm"
   when:
-    - "{{ 'AMD' in ansible_processor |join('') }}"
-    - "{{ 'svm' in cpu_flags }}"
+    - "'AMD' in ansible_processor |join('')"
+    - "'svm' in cpu_flags"
