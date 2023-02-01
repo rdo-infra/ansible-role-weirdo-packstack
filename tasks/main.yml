@@ -25,7 +25,7 @@
 - name: Set additional argument if running against testing repository
   set_fact:
     testing_arg: "--enable-rdo-testing=y"
-  when: (testing_repository is defined and testing_repository) or
+  when: (testing_repository is defined and testing_repository|bool) or
         (testing_repositories is defined and testing_repositories)
 
 - name: Configure additional arguments
