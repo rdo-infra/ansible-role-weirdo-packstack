@@ -31,7 +31,7 @@
 - name: Configure additional arguments
   set_fact:
     additional_args: >-
-      {{ testing_arg |default('') }} {{ virt_arg |default('') }}
+      {{ testing_arg |default('') }} {{ virt_arg |default('') }} {{ additional_args |default('') }}
 
 - name: Create directory where packstack logs will be stored
   file:
