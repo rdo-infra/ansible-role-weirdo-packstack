@@ -1,0 +1,9 @@
+Workflow+1: Joel Capitao <jcapitao@redhat.com>
+Verified+2: Zuul CI <zuul@review.rdoproject.org>
+Code-Review+1: Karolina Kula <kkula@redhat.com>
+Code-Review+2: Joel Capitao <jcapitao@redhat.com>
+Submitted-by: Zuul CI <zuul@review.rdoproject.org>
+Submitted-at: Fri, 04 Oct 2024 12:31:00 +0000
+Reviewed-on: https://review.rdoproject.org/r/c/rdo-infra/ansible-role-weirdo-packstack/+/54923
+Project: rdo-infra/ansible-role-weirdo-packstack
+Branch: refs/heads/master
